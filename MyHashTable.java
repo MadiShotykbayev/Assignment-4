@@ -31,8 +31,24 @@ public class MyHashTable {
         return index;
 
     }
-    public void put(K key, V value) {
+    public void put(K key, V value) { // add a new key and value pair
+        int index = hash(key);
+        HashNode<K, V> head = chainArray[index];
 
+        // Check is the key already exists or not
+        while(head != null) {
+            if(head.key.equals(key)) {
+                head.value = value;
+                return;
+            }
+            head = head.next;
+        }
+
+        // Create a new HashNode and add it to the front of the linked list
+        HashNode<K, V> newNode = new HashNode<K, V>(key, value);
+        newNode.next = chainArray[index];
+        chainArray[index] = newNode;
+        size++;
     }
     public V get(K key) {
 
