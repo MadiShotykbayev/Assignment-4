@@ -21,10 +21,12 @@ public class MyHashTable {
     public MyHashTable() { // the default constructor with the default size
         chainArray = new HashNode[M];
     }
-    public MyHashTable(int M) {
-
+    public MyHashTable(int M) { // the constructor takes an integer and sets M to the given value
+        this.M = M;
+        chainArray = new HashNode[M];
     }
     private int hash(K key) {
+
 
     }
     public void put(K key, V value) {
