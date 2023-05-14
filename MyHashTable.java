@@ -14,6 +14,7 @@ public class MyHashTable {
             return "{" + key + " " + value + "}";
         }
     }
+
     private HashNode<K, V>[] chainArray;
     private int M = 11; // size of the hash table, where 11 is a default number
     private int size; // pairs' number in the hash table
@@ -21,23 +22,26 @@ public class MyHashTable {
     public MyHashTable() { // the default constructor with the default size
         chainArray = new HashNode[M];
     }
+
     public MyHashTable(int M) { // the constructor takes an integer and sets M to the given value
         this.M = M;
         chainArray = new HashNode[M];
     }
+
     private int hash(K key) { // to return corresponding index via computing the hash code
         int hashCode = key.hashCode();
         int index = Math.abs(hashCode) % M;
         return index;
 
     }
+
     public void put(K key, V value) { // add a new key and value pair
         int index = hash(key);
         HashNode<K, V> head = chainArray[index];
 
         // Check is the key already exists or not
-        while(head != null) {
-            if(head.key.equals(key)) {
+        while (head != null) {
+            if (head.key.equals(key)) {
                 head.value = value;
                 return;
             }
@@ -50,6 +54,7 @@ public class MyHashTable {
         chainArray[index] = newNode;
         size++;
     }
+
     public V get(K key) { // retrieve the value associated with a given key
         int index = hash(key);
         HashNode<K, V> head = chainArray[index];
@@ -62,6 +67,7 @@ public class MyHashTable {
         }
         return null;
     }
+
     public V remove(K key) { // remove a key-value pair from the hash table
         int index = hash(key);
         HashNode<K, V> head = chainArray[index];
@@ -85,11 +91,11 @@ public class MyHashTable {
     }
 
     // check if a given value is present in the hash table
-    public boolean contains (V value) { // iterating over each linked list in the hash table and checking if the given value is present in each node of the linked list.
-        for(int i = 0; i < M; i++) {
+    public boolean contains(V value) { // iterating over each linked list in the hash table and checking if the given value is present in each node of the linked list.
+        for (int i = 0; i < M; i++) {
             HashNode<K, V> head = chainArray[i];
             while (head != null) {
-                if(head.value.equals(value)) {
+                if (head.value.equals(value)) {
                     return true;
                 }
                 head = head.next;
@@ -97,7 +103,17 @@ public class MyHashTable {
         }
         return false;
     }
-    public K getKey(V value) {
 
+    public K getKey(V value) {
+        for (int i = 0; i < M; i++) {
+            HashNode<K, V> head = chainArray[i];
+            while (head != null) {
+                if (head.value.equals(value)) {
+                    return head.key;
+                }
+                head = head.next;
+            }
+        }
+        return null;
     }
 }
