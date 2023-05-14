@@ -116,4 +116,18 @@ public class MyHashTable {
         }
         return null;
     }
+
+    public void printBucketSizes(){
+        int[] sizes = new int[M];
+        for (int i = 0; i < M; i++) {
+            HashNode<K, V> node = chainArray[i];
+            while (node != null) {
+                sizes[i]++;
+                node = node.next;
+            }
+        }
+        for (int i = 0; i < M; i++) {
+            System.out.println("Bucket " + i + ": " + sizes[i]);
+        }
+    }
 }
