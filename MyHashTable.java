@@ -62,9 +62,28 @@ public class MyHashTable {
         }
         return null;
     }
-    public V remove(K key) {
+    public V remove(K key) { // remove a key-value pair from the hash table
+        int index = hash(key);
+        HashNode<K, V> head = chainArray[index];
+        HashNode<K, V> prev = null;
 
+        // if the key is found, the associated value is removed from the linked list and returned, and the size of the hash table is decreased by 1
+        while (head != null) {
+            if (head.key.equals(key)) {
+                if (prev == null) {
+                    chainArray[index] = head.next;
+                } else {
+                    prev.next = head.next;
+                }
+                size--;
+                return head.value;
+            }
+            prev = head;
+            head = head.next;
+        }
+        return null;
     }
+
     public boolean contains (V value) {
 
     }
