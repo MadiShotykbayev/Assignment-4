@@ -117,7 +117,7 @@ public class MyHashTable {
         return null;
     }
 
-    public void printBucketSizes(){
+    public void printBucketSizes() {
         int[] sizes = new int[M];
         for (int i = 0; i < M; i++) {
             HashNode<K, V> node = chainArray[i];
@@ -129,5 +129,28 @@ public class MyHashTable {
         for (int i = 0; i < M; i++) {
             System.out.println("Bucket " + i + ": " + sizes[i]);
         }
+    }
+
+    public V replace(K key, V value) {
+        int index = hash(key);
+        index = hash(value);
+        HashNode<K, V> head = chainArray[index];
+        HashNode<K, V> prev = null;
+
+
+        while (head != null) {
+            if (head.key.equals(key)) {
+                if (prev == null) {
+                    chainArray[index] = head.next;
+                } else {
+                    prev.next = head.next;
+                }
+                size--;
+                return head.value;
+            }
+            prev = head;
+            head = head.next;
+        }
+        return null;
     }
 }

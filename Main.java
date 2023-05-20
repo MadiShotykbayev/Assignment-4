@@ -46,6 +46,10 @@ public class Main {
             table.put(key2, value);
         }
         table.printBucketSizes();
+
+        // replace and check (new mehod)
+        Student replacedStudent = new org.example.Student("Rachel", 19);
+        System.out.println("Replaced one: " + replacedStudent.getName() + " " + replacedStudent.getAge());
     }
 
 }
